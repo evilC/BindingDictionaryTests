@@ -9,8 +9,6 @@ namespace BindingDictionaryTestOne
         public DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>,
             BindingDescriptor> this[BindingType bindingType] => _bindings[bindingType];
 
-        public int Count => _bindings.Count;
-
         public delegate void EmptyHandler(DeviceDescriptor emptyEventArgs);
 
         private readonly EmptyHandler _emptyHandler;
@@ -75,48 +73,36 @@ namespace BindingDictionaryTestOne
 
         public void FireCallbacks(BindingDescriptor bindingDescriptor, int value)
         {
-            //if (ContainsKey(bindingDescriptor) && _bindings[bindingDescriptor].ContainsKey(bindingDescriptor.SubIndex))
-            //{
-            //    _bindings[bindingDescriptor][bindingDescriptor.SubIndex].FireCallbacks(bindingDescriptor, value);
-            //}
-        }
-
-        /*
-        public bool ContainsKey(BindingDescriptor bindingDescriptor)
-        {
-            return _bindings.ContainsKey(bindingDescriptor);
-        }
-
-        public bool ContainsKey((BindingType, int) key)
-        {
-            return _bindings.ContainsKey(key);
+            if (ContainsKey(bindingDescriptor.Type, bindingDescriptor.Index) && _bindings[bindingDescriptor.Type][bindingDescriptor.Index].ContainsKey(bindingDescriptor.SubIndex))
+            {
+                _bindings[bindingDescriptor.Type][bindingDescriptor.Index][bindingDescriptor.SubIndex].FireCallbacks(bindingDescriptor, value);
+            }
         }
 
         public bool ContainsKey(BindingType bindingType, int index)
         {
-            return _bindings.ContainsKey((bindingType, index));
+            return _bindings.ContainsKey(bindingType) && _bindings[bindingType].ContainsKey(index);
         }
 
-        public int Count((BindingType, int) key)
+        public bool ContainsKey(BindingType bindingType)
         {
-            return ContainsKey(key) ? _bindings[key].Count : 0;
+            return _bindings.ContainsKey(bindingType);
+        }
+
+        public int Count()
+        {
+            return _bindings.Count;
+        }
+
+        public int Count(BindingType bindingType)
+        {
+            return ContainsKey(bindingType) ? _bindings[bindingType].Count : 0;
         }
 
         public int Count(BindingType bindingType, int index)
         {
-            return Count((bindingType, index));
+            return ContainsKey(bindingType, index) ? _bindings[bindingType][index].Count : 0;
         }
-
-        public int Count(BindingDescriptor bindingDescriptor)
-        {
-            return Count((bindingDescriptor.Type, bindingDescriptor.Index));
-        }
-
-        private void BindingEmptyHandler(BindingDescriptor emptyeventargs)
-        {
-            _bindings.Remove(emptyeventargs);
-        }
-        */
 
         public IEnumerator<KeyValuePair<BindingType, DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>>> GetEnumerator()
         {
