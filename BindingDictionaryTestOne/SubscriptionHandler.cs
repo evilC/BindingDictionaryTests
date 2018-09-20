@@ -1,4 +1,6 @@
-﻿namespace BindingDictionaryTestOne
+﻿using System;
+
+namespace BindingDictionaryTestOne
 {
     public class SubscriptionHandler
     {
@@ -6,14 +8,14 @@
         private readonly EmptyHandler _emptyHandler;
 
         private readonly BindingDescriptorDictionary<
-                DictionaryWrapper<int, InputSubscriptionRequest, BindingDescriptor>
+                DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>
             > _bindings;
 
         public SubscriptionHandler(DeviceDescriptor deviceDescriptor, EmptyHandler emptyHandler)
         {
             _emptyHandler = emptyHandler;
             _bindings = new BindingDescriptorDictionary<
-                    DictionaryWrapper<int, InputSubscriptionRequest, BindingDescriptor>
+                    DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>
                 >(deviceDescriptor, DeviceEmptyHandler);
         }
 
@@ -27,17 +29,36 @@
             if (!_bindings.ContainsKey(subReq.BindingDescriptor))
             {
                 _bindings.Add(subReq.BindingDescriptor, 
-                    new DictionaryWrapper<int, InputSubscriptionRequest, BindingDescriptor>(subReq.BindingDescriptor, BindingEmptyHandler));
+                    new DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>(subReq.BindingDescriptor, BindingEmptyHandler));
             }
 
-            _bindings[subReq.BindingDescriptor].Add(subReq.BindingDescriptor.SubIndex, subReq);
+            var dict = _bindings[subReq.BindingDescriptor];
+            if (!dict.ContainsKey(subReq.BindingDescriptor.SubIndex))
+            {
+                dict.Add(subReq.BindingDescriptor.SubIndex, new SubscriptionProcessor(subReq.BindingDescriptor, SubIndexEmptyHandler));
+            }
+            
+            dict[subReq.BindingDescriptor.SubIndex].Add(subReq.SubscriptionDescriptor.SubscriberGuid, subReq);
+        }
+
+        private void SubIndexEmptyHandler(BindingDescriptor emptyeventargs)
+        {
+            _bindings[emptyeventargs].Remove(emptyeventargs.SubIndex);
         }
 
         public void Unsubscribe(InputSubscriptionRequest subReq)
         {
-            if (_bindings.ContainsKey(subReq.BindingDescriptor))
+            if (_bindings.ContainsKey(subReq.BindingDescriptor) && _bindings[subReq.BindingDescriptor].ContainsKey(subReq.BindingDescriptor.SubIndex))
             {
-                _bindings[subReq.BindingDescriptor].Remove(subReq.BindingDescriptor.SubIndex);
+                _bindings[subReq.BindingDescriptor][subReq.BindingDescriptor.SubIndex].Remove(subReq.SubscriptionDescriptor.SubscriberGuid);
+            }
+        }
+
+        public void FireCallbacks(BindingDescriptor bindingDescriptor, int value)
+        {
+            if (ContainsKey(bindingDescriptor) && _bindings[bindingDescriptor].ContainsKey(bindingDescriptor.SubIndex))
+            {
+                _bindings[bindingDescriptor][bindingDescriptor.SubIndex].FireCallbacks(bindingDescriptor, value);
             }
         }
 
