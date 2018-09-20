@@ -1,5 +1,6 @@
 ﻿namespace BindingDictionaryTestOne
 {
+    /*
     public class BindingDescriptorDictionary<TValue> : DictionaryWrapper<(BindingType, int), TValue, DeviceDescriptor>
     {
         public TValue this[BindingDescriptor bindingDescriptor] => Dictionary[GetKey(bindingDescriptor)];
@@ -38,4 +39,5 @@
             return ContainsKey((bindingType, index));
         }
     }
+    */
 }

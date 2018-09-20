@@ -25,17 +25,17 @@ namespace TestApp
             var pov1U = new SubscriptionHelper("POV 1 Up", subHandler, dev, pov1Up);
             var pov1R = new SubscriptionHelper("POV 1 Right", subHandler, dev, pov1Right);
 
-            var x = subHandler.ContainsKey(bd1);
-            var countBefore = subHandler.Count(BindingType.POV, 0);
-            var containsBefore = subHandler.ContainsKey(BindingType.POV, 0);
+            //var x = subHandler.ContainsKey(bd1);
+            //var countBefore = subHandler.Count(BindingType.POV, 0);
+            //var containsBefore = subHandler.ContainsKey(BindingType.POV, 0);
 
             subHandler.FireCallbacks(bd1, 100);
 
             pov1U.Unsubscribe();
             pov1R.Unsubscribe();
 
-            var countAfter = subHandler.Count(BindingType.POV, 0);
-            var containsAfter = subHandler.ContainsKey(BindingType.POV, 0);
+            //var countAfter = subHandler.Count(BindingType.POV, 0);
+            //var containsAfter = subHandler.ContainsKey(BindingType.POV, 0);
 
             b1.Unsubscribe();
             b1a.Unsubscribe();
