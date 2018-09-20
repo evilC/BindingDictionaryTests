@@ -6,6 +6,11 @@ namespace BindingDictionaryTestOne
 {
     public class SubscriptionHandler : IEnumerable<KeyValuePair<BindingType, DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>>>
     {
+        public DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>,
+            BindingDescriptor> this[BindingType bindingType] => _bindings[bindingType];
+
+        public int Count => _bindings.Count;
+
         public delegate void EmptyHandler(DeviceDescriptor emptyEventArgs);
 
         private readonly EmptyHandler _emptyHandler;

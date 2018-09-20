@@ -31,14 +31,17 @@ namespace TestApp
             //    var k = keyValuePair.Key;
             //}
 
-            //var bCount = subHandler[BindingType.Button].Count;
+            var tCount = subHandler.Count;
+            
+            var buttonsDict = subHandler[BindingType.Button];
+            var bCount = buttonsDict.Count;
 
-            //var k = subHandler[BindingType.Button].Keys;
 
             foreach (var item in subHandler)
             {
                 Console.WriteLine($"Found Item - Index: {item.Key}");
             }
+
             //var x = subHandler.ContainsKey(bd1);
             //var countBefore = subHandler.Count(BindingType.POV, 0);
             //var containsBefore = subHandler.ContainsKey(BindingType.POV, 0);
