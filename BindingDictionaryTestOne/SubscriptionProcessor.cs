@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingDictionaryTestOne
 {
-    class SubscriptionProcessor : DictionaryWrapper<Guid, InputSubscriptionRequest, BindingDescriptor>
+    public class SubscriptionProcessor : DictionaryWrapper<Guid, InputSubscriptionRequest, BindingDescriptor>
     {
         public SubscriptionProcessor(BindingDescriptor emptyEventArgs, EmptyHandler emptyHandler) : base(emptyEventArgs, emptyHandler)
         {

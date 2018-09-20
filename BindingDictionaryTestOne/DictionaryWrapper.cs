@@ -1,4 +1,6 @@
-﻿using System.Collections.Concurrent;
+﻿using System.Collections;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace BindingDictionaryTestOne
 {
@@ -8,7 +10,7 @@ namespace BindingDictionaryTestOne
     /// <typeparam name="TKey">The type of key used in the dictionary</typeparam>
     /// <typeparam name="TValue">The type of value used in the dictionary</typeparam>
     /// <typeparam name="TEmptyEventArgs">The argument type of the delegate</typeparam>
-    public class DictionaryWrapper<TKey, TValue, TEmptyEventArgs> : ISubscriptionDictionary<TKey, TValue>
+    public class DictionaryWrapper<TKey, TValue, TEmptyEventArgs> : IEnumerable<KeyValuePair<TKey, TValue>>
     {
         public delegate void EmptyHandler(TEmptyEventArgs emptyEventArgs);
         private readonly EmptyHandler _emptyHandler;
@@ -52,5 +54,14 @@ namespace BindingDictionaryTestOne
             return Dictionary.ContainsKey(key);
         }
 
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
+        {
+            return Dictionary.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

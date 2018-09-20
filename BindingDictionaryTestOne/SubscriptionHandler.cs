@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace BindingDictionaryTestOne
 {
-    public class SubscriptionHandler
+    public class SubscriptionHandler : IEnumerable<KeyValuePair<BindingType, DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>>>
     {
         public delegate void EmptyHandler(DeviceDescriptor emptyEventArgs);
 
         private readonly EmptyHandler _emptyHandler;
 
-        private readonly DictionaryWrapper<BindingType,
-            DictionaryWrapper<int,
-                DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>
-                , BindingDescriptor>
-            , DeviceDescriptor> _bindings;
+        private readonly DictionaryWrapper<BindingType, 
+            DictionaryWrapper<int, 
+                DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor> , BindingDescriptor> , DeviceDescriptor>
+            _bindings;
 
     public SubscriptionHandler(DeviceDescriptor deviceDescriptor, EmptyHandler emptyHandler)
         {
@@ -111,5 +112,15 @@ namespace BindingDictionaryTestOne
             _bindings.Remove(emptyeventargs);
         }
         */
+
+        public IEnumerator<KeyValuePair<BindingType, DictionaryWrapper<int, DictionaryWrapper<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>>> GetEnumerator()
+        {
+            return _bindings.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }
