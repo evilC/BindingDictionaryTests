@@ -33,20 +33,23 @@ namespace BindingDictionaryTestOne
             return Dictionary.GetOrAdd(key, value);
         }
 
-        public void Add(TKey key, TValue value)
+        public bool TryAdd(TKey key, TValue value)
         {
-            Dictionary.TryAdd(key, value);
+            return Dictionary.TryAdd(key, value);
         }
 
-        public void Remove(TKey key)
+        public bool TryRemove(TKey key, out TValue value)
         {
-            if (Dictionary.TryRemove(key, out _))
+            if (Dictionary.TryRemove(key, out value))
             {
                 if (Dictionary.IsEmpty)
                 {
                     _emptyHandler?.Invoke(_emptyEventArgs);
+                    return true;
                 }
             }
+
+            return false;
         }
 
         public bool ContainsKey(TKey key)

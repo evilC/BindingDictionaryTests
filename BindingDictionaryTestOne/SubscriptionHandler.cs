@@ -43,22 +43,22 @@ namespace BindingDictionaryTestOne
                         IndexEmptyHandler))
                 .GetOrAdd(subReq.BindingDescriptor.SubIndex,
                     new SubscriptionProcessor(subReq.BindingDescriptor, SubIndexEmptyHandler))
-                .Add(subReq.SubscriptionDescriptor.SubscriberGuid, subReq);
+                .TryAdd(subReq.SubscriptionDescriptor.SubscriberGuid, subReq);
         }
 
         private void BindingTypeEmptyHandler(BindingDescriptor emptyeventargs)
         {
-            _bindings.Remove(emptyeventargs.Type);
+            _bindings.TryRemove(emptyeventargs.Type, out _);
         }
 
         private void IndexEmptyHandler(BindingDescriptor emptyeventargs)
         {
-            _bindings[emptyeventargs.Type].Remove(emptyeventargs.Index);
+            _bindings[emptyeventargs.Type].TryRemove(emptyeventargs.Index, out _);
         }
 
         private void SubIndexEmptyHandler(BindingDescriptor emptyeventargs)
         {
-            _bindings[emptyeventargs.Type][emptyeventargs.Index].Remove(emptyeventargs.SubIndex);
+            _bindings[emptyeventargs.Type][emptyeventargs.Index].TryRemove(emptyeventargs.SubIndex, out _);
         }
 
         public void Unsubscribe(InputSubscriptionRequest subReq)
@@ -67,7 +67,7 @@ namespace BindingDictionaryTestOne
                 && _bindings[subReq.BindingDescriptor.Type].ContainsKey(subReq.BindingDescriptor.Index)
                 && _bindings[subReq.BindingDescriptor.Type][subReq.BindingDescriptor.Index].ContainsKey(subReq.BindingDescriptor.SubIndex))
             {
-                _bindings[subReq.BindingDescriptor.Type][subReq.BindingDescriptor.Index][subReq.BindingDescriptor.SubIndex].Remove(subReq.SubscriptionDescriptor.SubscriberGuid);
+                _bindings[subReq.BindingDescriptor.Type][subReq.BindingDescriptor.Index][subReq.BindingDescriptor.SubIndex].TryRemove(subReq.SubscriptionDescriptor.SubscriberGuid, out _);
             }
         }
 
