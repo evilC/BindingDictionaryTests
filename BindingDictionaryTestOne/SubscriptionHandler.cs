@@ -63,9 +63,7 @@ namespace BindingDictionaryTestOne
 
         public void Unsubscribe(InputSubscriptionRequest subReq)
         {
-            if (_bindings.ContainsKey(subReq.BindingDescriptor.Type) 
-                && _bindings[subReq.BindingDescriptor.Type].ContainsKey(subReq.BindingDescriptor.Index)
-                && _bindings[subReq.BindingDescriptor.Type][subReq.BindingDescriptor.Index].ContainsKey(subReq.BindingDescriptor.SubIndex))
+            if (ContainsKey(subReq.BindingDescriptor.Type, subReq.BindingDescriptor.Index, subReq.BindingDescriptor.SubIndex))
             {
                 _bindings[subReq.BindingDescriptor.Type][subReq.BindingDescriptor.Index][subReq.BindingDescriptor.SubIndex].TryRemove(subReq.SubscriptionDescriptor.SubscriberGuid, out _);
             }
@@ -73,10 +71,15 @@ namespace BindingDictionaryTestOne
 
         public void FireCallbacks(BindingDescriptor bindingDescriptor, int value)
         {
-            if (ContainsKey(bindingDescriptor.Type, bindingDescriptor.Index) && _bindings[bindingDescriptor.Type][bindingDescriptor.Index].ContainsKey(bindingDescriptor.SubIndex))
+            if (ContainsKey(bindingDescriptor.Type, bindingDescriptor.Index, bindingDescriptor.SubIndex))
             {
                 _bindings[bindingDescriptor.Type][bindingDescriptor.Index][bindingDescriptor.SubIndex].FireCallbacks(bindingDescriptor, value);
             }
+        }
+
+        public bool ContainsKey(BindingType bindingType, int index, int subIndex)
+        {
+            return ContainsKey(bindingType, index) && _bindings[bindingType][index].ContainsKey(subIndex);
         }
 
         public bool ContainsKey(BindingType bindingType, int index)
