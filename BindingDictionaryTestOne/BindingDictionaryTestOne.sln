@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BindingDictionaryTestOne", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{70C1457D-B65E-4DA0-83F0-21EFB29C585A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "..\UnitTests\UnitTests.csproj", "{FCB4A1AB-4097-49E2-B05B-F99F5A02D03A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{70C1457D-B65E-4DA0-83F0-21EFB29C585A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70C1457D-B65E-4DA0-83F0-21EFB29C585A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70C1457D-B65E-4DA0-83F0-21EFB29C585A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCB4A1AB-4097-49E2-B05B-F99F5A02D03A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCB4A1AB-4097-49E2-B05B-F99F5A02D03A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCB4A1AB-4097-49E2-B05B-F99F5A02D03A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCB4A1AB-4097-49E2-B05B-F99F5A02D03A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
