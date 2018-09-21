@@ -9,6 +9,8 @@ namespace UnitTests
 {
     public partial class SubscriptionHandlerTests
     {
+        private bool _callbackFired;
+
         private static SubscriptionDescriptor CreateSubscriptionDescriptor()
         {
             return new SubscriptionDescriptor
@@ -25,7 +27,12 @@ namespace UnitTests
             {
                 DeviceDescriptor = _device,
                 BindingDescriptor = bindingDescriptor,
-                SubscriptionDescriptor = subscriptionDescriptor
+                SubscriptionDescriptor = subscriptionDescriptor,
+                Callback = new Action<int>(value =>
+                {
+                    _callbackFired = true;
+                    _callbackResults.Add(new CallbackResult{BindingDescriptor = bindingDescriptor, Value = value});
+                })
             };
         }
 
@@ -36,5 +43,11 @@ namespace UnitTests
             return subReq;
         }
 
+    }
+
+    public class CallbackResult
+    {
+        public BindingDescriptor BindingDescriptor { get; set; }
+        public int Value { get; set; }
     }
 }

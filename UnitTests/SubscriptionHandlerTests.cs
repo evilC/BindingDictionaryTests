@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BindingDictionaryTestOne;
 using NUnit.Framework;
 
@@ -19,16 +20,48 @@ namespace UnitTests
         private static readonly BindingDescriptor BdPov2Up = new BindingDescriptor { Type = BindingType.POV, Index = 1, SubIndex = 0 };
         private static readonly BindingDescriptor BdPov2Right = new BindingDescriptor { Type = BindingType.POV, Index = 1, SubIndex = 1 };
 
+        private List<CallbackResult> _callbackResults;
+
         [SetUp]
         public void Init()
         {
             _subHandler = new SubscriptionHandler(_device, DeviceEmptyHandler);
             _deviceEmptyHandlerFired = false;
+            _callbackResults = new List<CallbackResult>();
         }
 
         private void DeviceEmptyHandler(DeviceDescriptor emptyeventargs)
         {
             _deviceEmptyHandlerFired = true;
+        }
+
+        [TestCase(TestName = "Multiple Subscriptions to the same input should each fire the same callback")]
+        public void CallbackMultiSubTest()
+        {
+            var isrB1A = SubIsr(BdBut1);
+            var isrB1B = SubIsr(BdBut1);
+            _subHandler.FireCallbacks(isrB1A.BindingDescriptor, 100);
+            Assert.That(_callbackResults.Count, Is.EqualTo(2));
+            Assert.That(_callbackResults[0].Value, Is.EqualTo(100));
+            Assert.That(_callbackResults[1].Value, Is.EqualTo(100));
+            Assert.That(_callbackResults[0].BindingDescriptor, Is.EqualTo(BdBut1));
+            Assert.That(_callbackResults[0].BindingDescriptor, Is.EqualTo(BdBut1));
+        }
+
+        [TestCase(TestName = "Multiple Subscriptions to the same input should each fire the same callback")]
+        public void CallbackDifferentSubTest()
+        {
+            var isrB1A = SubIsr(BdBut1);
+            var isrB1B = SubIsr(BdBut2);
+            _subHandler.FireCallbacks(isrB1A.BindingDescriptor, 100);
+            Assert.That(_callbackResults.Count, Is.EqualTo(1));
+            Assert.That(_callbackResults[0].Value, Is.EqualTo(100));
+            Assert.That(_callbackResults[0].BindingDescriptor, Is.EqualTo(BdBut1));
+
+            _subHandler.FireCallbacks(isrB1B.BindingDescriptor, 200);
+            Assert.That(_callbackResults.Count, Is.EqualTo(2));
+            Assert.That(_callbackResults[1].Value, Is.EqualTo(200));
+            Assert.That(_callbackResults[1].BindingDescriptor, Is.EqualTo(BdBut2));
         }
 
         [TestCase(TestName = "EmptyHandler should only fire when last item is removed")]
