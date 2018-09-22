@@ -10,7 +10,7 @@ namespace UnitTests.SubscriptionHandlerTests.Callbacks
         /// <summary>
         /// Given I make multiple subscriptions to the same BindingType (Button)
         /// When the callback is fired for each button
-        /// Then only the subscriber for that button button should get a callback
+        /// Then only the subscriber for that button should get a callback
         /// </summary>
         [TestFixture]
         class SameType
