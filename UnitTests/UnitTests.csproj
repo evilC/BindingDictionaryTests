@@ -59,12 +59,15 @@
     <Compile Include="SubscriptionHandlerTests\Callbacks\MultiSubscriber.cs" />
     <Compile Include="SubscriptionHandlerTests\Callbacks\MultiSubscription.cs" />
     <Compile Include="SubscriptionHandlerTests\ContainsKey\ContainsKeyIndex.cs" />
-    <Compile Include="SubscriptionHandlerTests\ContainsKey\ContainsKeyTypes.cs" />
+    <Compile Include="SubscriptionHandlerTests\ContainsKey\ContainsKeyType.cs" />
     <Compile Include="SubscriptionHandlerTests\Count\CountSubIndex.cs" />
-    <Compile Include="SubscriptionHandlerTests\Count\CountTypes.cs" />
+    <Compile Include="SubscriptionHandlerTests\Count\CountType.cs" />
     <Compile Include="SubscriptionHandlerTests\Count\CountIndex.cs" />
     <Compile Include="SubscriptionHandlerTests\EmptyHandler\EmptyHandler.cs" />
     <Compile Include="Helpers\SubscriptionHelper.cs" />
+    <Compile Include="SubscriptionHandlerTests\Enumerators\EnumerateSubIndex.cs" />
+    <Compile Include="SubscriptionHandlerTests\Enumerators\EnumerateIndex.cs" />
+    <Compile Include="SubscriptionHandlerTests\Enumerators\EnumerateType.cs" />
     <Compile Include="SubscriptionHandlerTests\Misc\ReSubscribe.cs" />
   </ItemGroup>
   <ItemGroup>

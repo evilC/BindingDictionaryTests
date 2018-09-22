@@ -12,7 +12,7 @@ namespace UnitTests.SubscriptionHandlerTests.ContainsKey
     /// </summary>
 
     [TestFixture]
-    public class ContainsKeyTypes
+    public class ContainsKeyType
     {
         private readonly SubscriptionHelper _subHelper = new SubscriptionHelper();
 

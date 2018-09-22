@@ -13,7 +13,7 @@ namespace UnitTests.SubscriptionHandlerTests.Count
     /// </summary>
 
     [TestFixture]
-    public class CountTypes
+    public class CountType
     {
         private readonly SubscriptionHelper _subHelper = new SubscriptionHelper();
 
