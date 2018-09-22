@@ -8,6 +8,6 @@ namespace UnitTests.Lookups
 {
     public enum SubscriptionType
     {
-        Subscribe, Unsubscribe
+        None, Subscribe, Unsubscribe
     }
 }

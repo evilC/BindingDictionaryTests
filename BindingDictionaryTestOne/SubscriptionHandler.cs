@@ -106,9 +106,9 @@ namespace BindingDictionaryTestOne
 
         #region ContainsKey
 
-        public bool ContainsKey(BindingType bindingType, int index, int subIndex)
+        public bool ContainsKey(BindingType bindingType)
         {
-            return ContainsKey(bindingType, index) && _bindings[bindingType][index].ContainsKey(subIndex);
+            return _bindings.ContainsKey(bindingType);
         }
 
         public bool ContainsKey(BindingType bindingType, int index)
@@ -116,10 +116,12 @@ namespace BindingDictionaryTestOne
             return _bindings.ContainsKey(bindingType) && _bindings[bindingType].ContainsKey(index);
         }
 
-        public bool ContainsKey(BindingType bindingType)
+        // Should not need to be externally visible
+        private bool ContainsKey(BindingType bindingType, int index, int subIndex)
         {
-            return _bindings.ContainsKey(bindingType);
+            return ContainsKey(bindingType, index) && _bindings[bindingType][index].ContainsKey(subIndex);
         }
+
         #endregion
 
         #region Count

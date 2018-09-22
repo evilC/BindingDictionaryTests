@@ -58,6 +58,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubscriptionHandlerTests\Callbacks\MultiSubscriber.cs" />
     <Compile Include="SubscriptionHandlerTests\Callbacks\MultiSubscription.cs" />
+    <Compile Include="SubscriptionHandlerTests\ContainsKey\ContainsKeyIndex.cs" />
+    <Compile Include="SubscriptionHandlerTests\ContainsKey\ContainsKeyTypes.cs" />
     <Compile Include="SubscriptionHandlerTests\Count\CountSubIndex.cs" />
     <Compile Include="SubscriptionHandlerTests\Count\CountTypes.cs" />
     <Compile Include="SubscriptionHandlerTests\Count\CountIndex.cs" />
