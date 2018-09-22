@@ -65,6 +65,7 @@
     <Compile Include="SubscriptionHandlerTests\Count\CountIndex.cs" />
     <Compile Include="SubscriptionHandlerTests\EmptyHandler\EmptyHandler.cs" />
     <Compile Include="Helpers\SubscriptionHelper.cs" />
+    <Compile Include="SubscriptionHandlerTests\Misc\ReSubscribe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
