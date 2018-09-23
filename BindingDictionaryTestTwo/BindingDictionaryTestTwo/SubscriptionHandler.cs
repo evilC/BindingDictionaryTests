@@ -64,13 +64,17 @@ namespace BindingDictionaryTestTwo
         }
         #endregion
 
-        #region ConcurrentDictionary method wrappings
+        #region Dictionary counting and querying
+
         #region ContainsKey
+
+        // Are there any Axis / Button / POV subscriptions?
         public bool ContainsKey(BindingType bindingType)
         {
             return _bindings.ContainsKey(bindingType);
         }
 
+        // Which Axes / Buttons have subscriptions?
         public bool ContainsKey(BindingType bindingType, int index)
         {
             return _bindings.ContainsKey(bindingType) && _bindings[bindingType].ContainsKey(index);
@@ -85,16 +89,19 @@ namespace BindingDictionaryTestTwo
 
         #region GetKeys
 
+        // Which BindingTypes have subscriptions?
         public IEnumerable<BindingType> GetKeys()
         {
             return _bindings.GetKeys();
         }
 
+        // Which Indexes have subscriptions?
         public IEnumerable<int> GetKeys(BindingType bindingType)
         {
             return _bindings[bindingType].GetKeys();
         }
 
+        // Which SubIndexes have subscriptions?
         public IEnumerable<int> GetKeys(BindingType bindingType, int index)
         {
             return _bindings[bindingType][index].GetKeys();
