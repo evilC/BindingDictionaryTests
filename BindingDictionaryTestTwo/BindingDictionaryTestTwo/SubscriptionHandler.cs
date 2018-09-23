@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,21 +12,12 @@ namespace BindingDictionaryTestTwo
             SubscriptionDictionary<int, SubscriptionDictionary<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>,
             DeviceDescriptor> _bindings;
 
-        public delegate void DeviceEmptyHandler(DeviceDescriptor emptyEventArgs);
-        private readonly DeviceEmptyHandler _deviceEmptyHandler;
-
-        public SubscriptionHandler(DeviceDescriptor deviceDescriptor, DeviceEmptyHandler deviceEmptyHandler)
+        public SubscriptionHandler(DeviceDescriptor deviceDescriptor, EventHandler<DeviceDescriptor> deviceEmptyHandler)
         {
-            _deviceEmptyHandler = deviceEmptyHandler;
             _bindings =
                 new SubscriptionDictionary<BindingType,
                     SubscriptionDictionary<int, SubscriptionDictionary<int, SubscriptionProcessor, BindingDescriptor>,
-                        BindingDescriptor>, DeviceDescriptor>(deviceDescriptor, OnDeviceEmpty);
-        }
-
-        private void OnDeviceEmpty(DeviceDescriptor emptyeventargs)
-        {
-            _deviceEmptyHandler?.Invoke(emptyeventargs);
+                        BindingDescriptor>, DeviceDescriptor>(deviceDescriptor, deviceEmptyHandler);
         }
 
         #region Subscriptions
@@ -134,28 +126,31 @@ namespace BindingDictionaryTestTwo
         /// <summary>
         /// Gets called when a given BindingType (Axes, Buttons or POVs) no longer has any subscriptions
         /// </summary>
-        /// <param name="emptyeventargs">A BindingDescriptor describing the binding</param>
-        private void BindingTypeEmptyHandler(BindingDescriptor emptyeventargs)
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        private void BindingTypeEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
-            _bindings.TryRemove(emptyeventargs.Type, out _);
+            _bindings.TryRemove(bindingDescriptor.Type, out _);
         }
 
         /// <summary>
         /// Gets called when a given Index (A single Axis, Button or POV) no longer has any subscriptions
         /// </summary>
-        /// <param name="emptyeventargs">A BindingDescriptor describing the binding</param>
-        private void IndexEmptyHandler(BindingDescriptor emptyeventargs)
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        private void IndexEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
-            _bindings[emptyeventargs.Type].TryRemove(emptyeventargs.Index, out _);
+            _bindings[bindingDescriptor.Type].TryRemove(bindingDescriptor.Index, out _);
         }
 
         /// <summary>
         /// Gets called when a given SubIndex (eg POV direction) no longer has any subscriptions
         /// </summary>
-        /// <param name="emptyeventargs">A BindingDescriptor describing the binding</param>
-        private void SubIndexEmptyHandler(BindingDescriptor emptyeventargs)
+        /// <param name="sender">The sender of the event</param>
+        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        private void SubIndexEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
-            _bindings[emptyeventargs.Type][emptyeventargs.Index].TryRemove(emptyeventargs.SubIndex, out _);
+            _bindings[bindingDescriptor.Type][bindingDescriptor.Index].TryRemove(bindingDescriptor.SubIndex, out _);
         }
     }
 }

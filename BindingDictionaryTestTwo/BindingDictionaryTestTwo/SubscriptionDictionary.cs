@@ -9,18 +9,17 @@ namespace BindingDictionaryTestTwo
 {
     public class SubscriptionDictionary<TKey, TValue, TEmptyEventArgs>
     {
-        public delegate void EmptyHandler(TEmptyEventArgs emptyEventArgs);
-        private readonly EmptyHandler _emptyHandler;
+        private event EventHandler<TEmptyEventArgs> EmptyHandler;
         private readonly TEmptyEventArgs _emptyEventArgs;
 
         public TValue this[TKey key] => Dictionary[key];
 
         protected readonly ConcurrentDictionary<TKey, TValue> Dictionary = new ConcurrentDictionary<TKey, TValue>();
 
-        public SubscriptionDictionary(TEmptyEventArgs emptyEventArgs, EmptyHandler emptyHandler)
+        public SubscriptionDictionary(TEmptyEventArgs emptyEventArgs, EventHandler<TEmptyEventArgs> emptyHandler)
         {
             _emptyEventArgs = emptyEventArgs;
-            _emptyHandler = emptyHandler;
+            EmptyHandler = emptyHandler;
         }
 
         public int Count()
@@ -53,7 +52,7 @@ namespace BindingDictionaryTestTwo
             if (!Dictionary.TryRemove(key, out value)) return false;
             if (Dictionary.IsEmpty)
             {
-                _emptyHandler?.Invoke(_emptyEventArgs);
+                EmptyHandler?.Invoke(this, _emptyEventArgs);
             }
 
             return true;

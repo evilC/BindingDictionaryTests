@@ -54,7 +54,7 @@ namespace TestApp
 
         }
 
-        private static void DeviceEmptyHandler(DeviceDescriptor emptyeventargs)
+        private static void DeviceEmptyHandler(object sender, DeviceDescriptor emptyeventargs)
         {
             Console.WriteLine($"Device {emptyeventargs.DeviceHandle} / {emptyeventargs.DeviceInstance} has no more subscriptions");
         }

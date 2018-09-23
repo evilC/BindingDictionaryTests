@@ -4,7 +4,7 @@ namespace BindingDictionaryTestTwo
 {
     public class SubscriptionProcessor : SubscriptionDictionary<Guid, InputSubscriptionRequest, BindingDescriptor>
     {
-        public SubscriptionProcessor(BindingDescriptor emptyEventArgs, EmptyHandler emptyHandler) : base(emptyEventArgs, emptyHandler)
+        public SubscriptionProcessor(BindingDescriptor emptyEventArgs, EventHandler<BindingDescriptor> emptyHandler) : base(emptyEventArgs, emptyHandler)
         {
         }
 
