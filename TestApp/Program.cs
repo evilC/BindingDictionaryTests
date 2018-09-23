@@ -28,7 +28,7 @@ namespace TestApp
             var tCount = subHandler.Count();
             
             var buttonsDict = subHandler[BindingType.Button];
-            var bCount = buttonsDict.Count;
+            var bCount = buttonsDict.Count();
 
 
             foreach (var item in subHandler)
@@ -52,11 +52,6 @@ namespace TestApp
             b2.Unsubscribe();
 
             Console.ReadLine();
-        }
-
-        private static void EmptyHandler(BindingDescriptor emptyeventargs)
-        {
-            throw new NotImplementedException();
         }
 
         private static void DeviceEmptyHandler(DeviceDescriptor emptyeventargs)

@@ -18,7 +18,6 @@ namespace BindingDictionaryTestOne
 
         public TValue this[TKey key] => Dictionary[key];
         public bool IsEmpty => Dictionary.IsEmpty;
-        public int Count => Dictionary.Count;
 
         protected readonly ConcurrentDictionary<TKey, TValue> Dictionary = new ConcurrentDictionary<TKey, TValue>();
 
@@ -50,6 +49,11 @@ namespace BindingDictionaryTestOne
             }
 
             return false;
+        }
+
+        public int Count()
+        {
+            return Dictionary.Count;
         }
 
         public bool ContainsKey(TKey key)
