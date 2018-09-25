@@ -58,7 +58,7 @@
     <Compile Include="Polling\DirectInput\Utilities.cs" />
     <Compile Include="Polling\Interfaces.cs" />
     <Compile Include="Polling\XInput\Utilities.cs" />
-    <Compile Include="Polling\XInput\XiButtonProcessor.cs" />
+    <Compile Include="Polling\XInput\XiPollProcessors.cs" />
     <Compile Include="Polling\XInput\XiDevicePollHandler.cs" />
     <Compile Include="Subscriptions\Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
