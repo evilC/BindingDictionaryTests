@@ -1,5 +1,6 @@
 ﻿using System;
 using BindingDictionaryTestTwo;
+using BindingDictionaryTestTwo.Subscriptions;
 
 namespace TestApp
 {

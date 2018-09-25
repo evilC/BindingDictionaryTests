@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BindingDictionaryTestTwo
+namespace BindingDictionaryTestTwo.Subscriptions
 {
-    public class SubscriptionHandler : ISubscriptionStore, ISubscriptionInfo
+    public class SubscriptionHandler : ISubscriptionHandler
     {
         private readonly SubscriptionDictionary<BindingType,
             SubscriptionDictionary<int, SubscriptionDictionary<int, SubscriptionProcessor, BindingDescriptor>, BindingDescriptor>,
@@ -53,7 +50,7 @@ namespace BindingDictionaryTestTwo
         /// <summary>
         /// Fires all subscription callbacks for a given Type / Index / SubIndex
         /// </summary>
-        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        /// <param name="bindingDescriptor">A Binding describing the binding</param>
         /// <param name="value">The new value for the input</param>
         public void FireCallbacks(BindingDescriptor bindingDescriptor, int value)
         {
@@ -134,7 +131,7 @@ namespace BindingDictionaryTestTwo
         /// Gets called when a given BindingType (Axes, Buttons or POVs) no longer has any subscriptions
         /// </summary>
         /// <param name="sender">The sender of the event</param>
-        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        /// <param name="bindingDescriptor">A Binding describing the binding</param>
         private void BindingTypeEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
             _bindings.TryRemove(bindingDescriptor.Type, out _);
@@ -144,7 +141,7 @@ namespace BindingDictionaryTestTwo
         /// Gets called when a given Index (A single Axis, Button or POV) no longer has any subscriptions
         /// </summary>
         /// <param name="sender">The sender of the event</param>
-        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        /// <param name="bindingDescriptor">A Binding describing the binding</param>
         private void IndexEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
             _bindings[bindingDescriptor.Type].TryRemove(bindingDescriptor.Index, out _);
@@ -154,7 +151,7 @@ namespace BindingDictionaryTestTwo
         /// Gets called when a given SubIndex (eg POV direction) no longer has any subscriptions
         /// </summary>
         /// <param name="sender">The sender of the event</param>
-        /// <param name="bindingDescriptor">A BindingDescriptor describing the binding</param>
+        /// <param name="bindingDescriptor">A Binding describing the binding</param>
         private void SubIndexEmptyHandler(object sender, BindingDescriptor bindingDescriptor)
         {
             _bindings[bindingDescriptor.Type][bindingDescriptor.Index].TryRemove(bindingDescriptor.SubIndex, out _);

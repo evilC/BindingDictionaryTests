@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BindingDictionaryTestTwo
+namespace BindingDictionaryTestTwo.Subscriptions
 {
     public interface ISubscriptionStore
     {
@@ -19,5 +19,10 @@ namespace BindingDictionaryTestTwo
         IEnumerable<BindingType> GetKeys();
         IEnumerable<int> GetKeys(BindingType bindingType);
         IEnumerable<int> GetKeys(BindingType bindingType, int index);
+    }
+
+    public interface ISubscriptionHandler: ISubscriptionStore, ISubscriptionInfo
+    {
+
     }
 }

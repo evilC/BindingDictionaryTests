@@ -177,4 +177,33 @@ namespace BindingDictionaryTestTwo
         }
     }
 
+    //public struct PreprocessedUpdate
+    //{
+    //    public PreprocessedUpdate(InputDescriptor inputDescriptor, int value)
+    //    {
+    //        InputDescriptor = inputDescriptor;
+    //        Value = value;
+    //    }
+    //    public InputDescriptor InputDescriptor { get; set; }
+    //    public int Value { get; set; }
+    //}
+
+    public struct InputDescriptor
+    {
+        public BindingType Type { get; set; }
+        public int Index { get; set; }
+    }
+
+    public struct BindingUpdate
+    {
+        public BindingDescriptor Binding { get; set; }
+        public int Value { get; set; }
+    }
+
+    public struct BindModeUpdate
+    {
+        public DeviceDescriptor Device { get; set; }
+        public BindingDescriptor Binding { get; set; }
+        public int Value { get; set; }
+    }
 }

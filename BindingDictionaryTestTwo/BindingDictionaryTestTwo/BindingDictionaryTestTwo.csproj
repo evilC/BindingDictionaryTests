@@ -31,6 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.DirectInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.DirectInput.4.2.0\lib\net45\SharpDX.DirectInput.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>packages\SharpDX.XInput.4.2.0\lib\net45\SharpDX.XInput.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,12 +50,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Polling\DevicePollHandler.cs" />
     <Compile Include="DTOs.cs" />
-    <Compile Include="Interfaces.cs" />
+    <Compile Include="Polling\DirectInput\DiDevicePollHandler.cs" />
+    <Compile Include="Polling\DirectInput\DiPollProcessors.cs" />
+    <Compile Include="Polling\DirectInput\PovHelper.cs" />
+    <Compile Include="Polling\DirectInput\Utilities.cs" />
+    <Compile Include="Polling\Interfaces.cs" />
+    <Compile Include="Polling\XInput\Utilities.cs" />
+    <Compile Include="Polling\XInput\XiButtonProcessor.cs" />
+    <Compile Include="Polling\XInput\XiDevicePollHandler.cs" />
+    <Compile Include="Subscriptions\Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubscriptionDictionary.cs" />
-    <Compile Include="SubscriptionHandler.cs" />
-    <Compile Include="SubscriptionProcessor.cs" />
+    <Compile Include="Subscriptions\SubscriptionDictionary.cs" />
+    <Compile Include="Subscriptions\SubscriptionHandler.cs" />
+    <Compile Include="Subscriptions\SubscriptionProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

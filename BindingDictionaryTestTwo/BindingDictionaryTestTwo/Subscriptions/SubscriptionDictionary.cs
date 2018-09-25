@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BindingDictionaryTestTwo
+namespace BindingDictionaryTestTwo.Subscriptions
 {
     public class SubscriptionDictionary<TKey, TValue, TEmptyEventArgs>
     {

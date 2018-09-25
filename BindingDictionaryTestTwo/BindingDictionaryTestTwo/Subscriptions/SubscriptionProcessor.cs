@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BindingDictionaryTestTwo
+namespace BindingDictionaryTestTwo.Subscriptions
 {
     public class SubscriptionProcessor : SubscriptionDictionary<Guid, InputSubscriptionRequest, BindingDescriptor>
     {
