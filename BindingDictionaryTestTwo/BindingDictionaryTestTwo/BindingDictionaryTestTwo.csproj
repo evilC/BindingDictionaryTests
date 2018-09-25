@@ -56,6 +56,9 @@
     <Compile Include="Polling\DirectInput\DiPollProcessors.cs" />
     <Compile Include="Polling\DirectInput\PovHelper.cs" />
     <Compile Include="Polling\DirectInput\Utilities.cs" />
+    <Compile Include="Polling\Interception\IcepKbPollHandler.cs" />
+    <Compile Include="Polling\Interception\IcepKbPollProcessor.cs" />
+    <Compile Include="Polling\Interception\Lib\ManagedWrapper.cs" />
     <Compile Include="Polling\Interfaces.cs" />
     <Compile Include="Polling\XInput\Utilities.cs" />
     <Compile Include="Polling\XInput\XiPollProcessors.cs" />
@@ -69,5 +72,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BindingDictionaryTestTwo;
 using BindingDictionaryTestTwo.Polling;
 using BindingDictionaryTestTwo.Polling.DirectInput;
+using BindingDictionaryTestTwo.Polling.Interception;
+using BindingDictionaryTestTwo.Polling.Interception.Lib;
 using BindingDictionaryTestTwo.Polling.XInput;
 using BindingDictionaryTestTwo.Subscriptions;
 using SharpDX.DirectInput;
@@ -19,10 +21,12 @@ namespace TestApp
         {
             var dev = new DeviceDescriptor { DeviceHandle = "TestHandle" };
             var subHandler = new SubscriptionHandler(dev, DeviceEmptyHandler);
-            var diHandler = new DiDevicePollHandler(new DeviceDescriptor(), subHandler);
+            var diHandler = new DiDevicePollHandler(new DeviceDescriptor{DeviceHandle = "DI-Fake"}, subHandler);
             diHandler.BindModeUpdate = BindModeHandler;
-            var xiHandler = new XiDevicePollHandler(new DeviceDescriptor(), subHandler);
+            var xiHandler = new XiDevicePollHandler(new DeviceDescriptor {DeviceHandle = "XI-Fake"}, subHandler);
             xiHandler.BindModeUpdate = BindModeHandler;
+            var iceptKbHandler = new IcepKbPollHandler(new DeviceDescriptor{DeviceHandle = "Interception-Fake"}, subHandler);
+            iceptKbHandler.BindModeUpdate = BindModeHandler;
 
             var bd1 = new BindingDescriptor { Type = BindingType.Button, Index = 1 };
             var bd2 = new BindingDescriptor { Type = BindingType.Button, Index = 2 };
@@ -52,10 +56,14 @@ namespace TestApp
 
             //subHandler.FireCallbacks(bd1, 100);
             //diHandler.SetDetectionMode(DetectionMode.Bind);
-            xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.B } });
-            xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.None } });
-            xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.DPadRight } });
-            xiHandler.Poll(new State { Gamepad = { LeftThumbX = 200} });
+            iceptKbHandler.SetDetectionMode(DetectionMode.Bind);
+
+            iceptKbHandler.Poll(new ManagedWrapper.Stroke{key = new ManagedWrapper.KeyStroke { code = 1, state = 0 } });
+
+            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.B } });
+            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.None } });
+            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.DPadRight } });
+            //xiHandler.Poll(new State { Gamepad = { LeftThumbX = 200} });
 
             //diHandler.Poll(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 0 });
             //diHandler.Poll(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 9000});

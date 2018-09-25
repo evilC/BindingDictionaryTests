@@ -63,9 +63,10 @@ namespace BindingDictionaryTestTwo.Polling
 
         protected abstract BindingUpdate[] PreProcess(TPollType pollData);
 
-        protected virtual (BindingType, int) GetPollProcessorKey(BindingDescriptor bindingDescriptor)
-        {
-            return (bindingDescriptor.Type, bindingDescriptor.Index);
-        }
+        protected abstract (BindingType, int) GetPollProcessorKey(BindingDescriptor bindingDescriptor);
+        //protected virtual (BindingType, int) GetPollProcessorKey(BindingDescriptor bindingDescriptor)
+        //{
+        //    return (bindingDescriptor.Type, bindingDescriptor.Index);
+        //}
     }
 }
