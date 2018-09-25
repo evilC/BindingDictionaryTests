@@ -4,7 +4,7 @@ using SharpDX.DirectInput;
 
 namespace BindingDictionaryTestTwo.Polling.DirectInput
 {
-    public class DiDeviceUpdateHandler : DeviceUpdateHandler<JoystickUpdate>
+    public class DiDeviceUpdateHandler : DeviceUpdateHandler<JoystickUpdate, (BindingType, int)>
     {
         public DiDeviceUpdateHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
         {

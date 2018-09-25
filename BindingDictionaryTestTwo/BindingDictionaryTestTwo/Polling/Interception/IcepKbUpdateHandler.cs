@@ -8,7 +8,7 @@ using BindingDictionaryTestTwo.Subscriptions;
 
 namespace BindingDictionaryTestTwo.Polling.Interception
 {
-    public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke>
+    public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke, (BindingType, int)>
     {
         public IcepKbUpdateHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
         {

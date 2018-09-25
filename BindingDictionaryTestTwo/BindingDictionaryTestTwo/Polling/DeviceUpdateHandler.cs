@@ -10,12 +10,13 @@ namespace BindingDictionaryTestTwo.Polling
     /// will generate Subscription Events or Bind Mode events accordingly
     /// </summary>
     /// <typeparam name="TUpdate">The Type of the update that comes from the device</typeparam>
-    public abstract class DeviceUpdateHandler<TUpdate>
+    /// <typeparam name="TProcessorKey">The Key type used for the <see cref="UpdateProcessors"/> dictionary</typeparam>
+    public abstract class DeviceUpdateHandler<TUpdate, TProcessorKey>
     {
         private readonly DeviceDescriptor _deviceDescriptor;
         protected ISubscriptionHandler SubHandler;
         protected DetectionMode DetectionMode = DetectionMode.Subscription;
-        protected Dictionary<(BindingType, int), IUpdateProcessor> UpdateProcessors = new Dictionary<(BindingType, int), IUpdateProcessor>();
+        protected Dictionary<TProcessorKey, IUpdateProcessor> UpdateProcessors = new Dictionary<TProcessorKey, IUpdateProcessor>();
 
         public EventHandler<BindModeUpdate> BindModeUpdate;
 
@@ -105,7 +106,7 @@ namespace BindingDictionaryTestTwo.Polling
         /// </summary>
         /// <param name="bindingDescriptor">Describes the input that changed</param>
         /// <returns>The key for the <see cref="UpdateProcessors"/> dictionary</returns>
-        protected abstract (BindingType, int) GetUpdateProcessorKey(BindingDescriptor bindingDescriptor);
+        protected abstract TProcessorKey GetUpdateProcessorKey(BindingDescriptor bindingDescriptor);
         //protected virtual (BindingType, int) GetUpdateProcessorKey(BindingDescriptor bindingDescriptor)
         //{
         //    return (bindingDescriptor.Type, bindingDescriptor.Index);

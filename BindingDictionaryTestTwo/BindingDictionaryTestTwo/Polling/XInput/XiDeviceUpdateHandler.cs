@@ -8,7 +8,7 @@ using SharpDX.XInput;
 
 namespace BindingDictionaryTestTwo.Polling.XInput
 {
-    public class XiDeviceUpdateHandler : DeviceUpdateHandler<State>
+    public class XiDeviceUpdateHandler : DeviceUpdateHandler<State, (BindingType, int)>
     {
         private State _lastState;
 
