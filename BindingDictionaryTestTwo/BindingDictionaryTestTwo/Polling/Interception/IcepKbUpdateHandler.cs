@@ -8,11 +8,11 @@ using BindingDictionaryTestTwo.Subscriptions;
 
 namespace BindingDictionaryTestTwo.Polling.Interception
 {
-    public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke, (BindingType, int)>
+    public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke, BindingType>
     {
         public IcepKbUpdateHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
         {
-            UpdateProcessors.Add((BindingType.Button, 0), new IcepKbUpdateProcessor());
+            UpdateProcessors.Add((BindingType.Button), new IcepKbUpdateProcessor());
         }
 
         protected override BindingUpdate[] PreProcessUpdate(ManagedWrapper.Stroke update)
@@ -58,9 +58,9 @@ namespace BindingDictionaryTestTwo.Polling.Interception
             return new[] { new BindingUpdate { Binding = new BindingDescriptor() { Type = BindingType.Button, Index = code }, Value = state } };
         }
 
-        protected override (BindingType, int) GetUpdateProcessorKey(BindingDescriptor bindingDescriptor)
+        protected override BindingType GetUpdateProcessorKey(BindingDescriptor bindingDescriptor)
         {
-            return (bindingDescriptor.Type, 0);
+            return bindingDescriptor.Type;
         }
     }
 }
