@@ -14,9 +14,13 @@ namespace BindingDictionaryTestTwo.Polling.XInput
 
         public XiDevicePollHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
         {
+            // All Buttons share one Poll Processor
             PollProcessors.Add((BindingType.Button, 0), new XiButtonProcessor());
+            // LS and RS share one Poll Processor
             PollProcessors.Add((BindingType.Axis, 0), new XiAxisProcessor());
-            PollProcessors.Add((BindingType.Axis, 0), new XiTriggerProcessor());
+            // Triggers have their own Poll Processor
+            PollProcessors.Add((BindingType.Axis, 1), new XiTriggerProcessor());
+            // DPad directions are buttons, so share one Button Poll Processor
             PollProcessors.Add((BindingType.POV, 0), new XiButtonProcessor());
         }
 
@@ -36,7 +40,6 @@ namespace BindingDictionaryTestTwo.Polling.XInput
                 var lastValue = (flag & _lastState.Gamepad.Buttons) == flag ? 1 : 0;
                 if (thisValue != lastValue)
                 {
-                    //result.PollItems.Add(new XiPollItem { BindingType = bindingType, Index = i, Value = thisValue });
                     updates.Add(new BindingUpdate {Binding = new BindingDescriptor{Type = bindingType, Index = index, SubIndex = subIndex}, Value = thisValue });
                 }
             }
@@ -52,7 +55,7 @@ namespace BindingDictionaryTestTwo.Polling.XInput
             return updates.ToArray();
         }
 
-        private void ProcessAxis(List<BindingUpdate> updates, int index, int thisState, int lastState)
+        private static void ProcessAxis(ICollection<BindingUpdate> updates, int index, int thisState, int lastState)
         {
             if (thisState != lastState)
             {
@@ -62,16 +65,8 @@ namespace BindingDictionaryTestTwo.Polling.XInput
 
         protected override (BindingType, int) GetPollProcessorKey(BindingDescriptor bindingDescriptor)
         {
-            //return (bindingDescriptor.Type, 0);
-            if (bindingDescriptor.Type == BindingType.Axis && bindingDescriptor.Index > 4)
-            {
-                return (bindingDescriptor.Type, 1);
-            }
-            return (bindingDescriptor.Type, 0);
-            //var type = bindingDescriptor.Type;
-            //if (type == BindingType.Axis) return (type, 0);
-            //if (type == BindingType.Button) return (type, 0);
-
+            var index = bindingDescriptor.Type == BindingType.Axis && bindingDescriptor.Index > 4 ? 1 : 0;
+            return (bindingDescriptor.Type, index);
         }
     }
 }

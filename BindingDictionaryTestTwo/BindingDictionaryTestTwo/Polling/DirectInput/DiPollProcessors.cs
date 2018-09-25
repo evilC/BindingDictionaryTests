@@ -15,6 +15,15 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
         }
     }
 
+    public class DiAxisProcessor : IPollProcessor
+    {
+        public BindingUpdate[] Process(BindingUpdate update)
+        {
+            var value = (65535 - update.Value) - 32768;
+            return new[] { new BindingUpdate{Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = 0 }, Value = value} };
+        }
+    }
+
     public class DiPoVProcessor : IPollProcessor
     {
         private int _currentValue = -1;
