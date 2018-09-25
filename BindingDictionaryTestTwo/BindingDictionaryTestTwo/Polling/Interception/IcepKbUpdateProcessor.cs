@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingDictionaryTestTwo.Polling.Interception
 {
-    public class IcepKbPollProcessor : IPollProcessor
+    public class IcepKbUpdateProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {

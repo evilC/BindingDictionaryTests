@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingDictionaryTestTwo.Polling.XInput
 {
-    public class XiButtonProcessor : IPollProcessor
+    public class XiButtonProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
@@ -15,7 +15,7 @@ namespace BindingDictionaryTestTwo.Polling.XInput
         }
     }
 
-    public class XiAxisProcessor : IPollProcessor
+    public class XiAxisProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
@@ -24,7 +24,7 @@ namespace BindingDictionaryTestTwo.Polling.XInput
         }
     }
 
-    public class XiTriggerProcessor : IPollProcessor
+    public class XiTriggerProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {

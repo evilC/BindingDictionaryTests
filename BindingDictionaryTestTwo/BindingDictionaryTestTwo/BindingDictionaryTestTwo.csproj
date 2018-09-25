@@ -50,19 +50,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Polling\DevicePollHandler.cs" />
+    <Compile Include="Polling\DeviceUpdateHandler.cs" />
     <Compile Include="DTOs.cs" />
-    <Compile Include="Polling\DirectInput\DiDevicePollHandler.cs" />
-    <Compile Include="Polling\DirectInput\DiPollProcessors.cs" />
+    <Compile Include="Polling\DirectInput\DiDeviceUpdateHandler.cs" />
+    <Compile Include="Polling\DirectInput\DiUpdatelProcessors.cs" />
     <Compile Include="Polling\DirectInput\PovHelper.cs" />
     <Compile Include="Polling\DirectInput\Utilities.cs" />
-    <Compile Include="Polling\Interception\IcepKbPollHandler.cs" />
-    <Compile Include="Polling\Interception\IcepKbPollProcessor.cs" />
+    <Compile Include="Polling\Interception\IcepKbUpdateHandler.cs" />
+    <Compile Include="Polling\Interception\IcepKbUpdateProcessor.cs" />
     <Compile Include="Polling\Interception\Lib\ManagedWrapper.cs" />
     <Compile Include="Polling\Interfaces.cs" />
     <Compile Include="Polling\XInput\Utilities.cs" />
-    <Compile Include="Polling\XInput\XiPollProcessors.cs" />
-    <Compile Include="Polling\XInput\XiDevicePollHandler.cs" />
+    <Compile Include="Polling\XInput\XiUpdateProcessors.cs" />
+    <Compile Include="Polling\XInput\XiDeviceUpdateHandler.cs" />
     <Compile Include="Subscriptions\Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Subscriptions\SubscriptionDictionary.cs" />

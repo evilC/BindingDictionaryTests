@@ -8,17 +8,17 @@ using BindingDictionaryTestTwo.Subscriptions;
 
 namespace BindingDictionaryTestTwo.Polling.Interception
 {
-    public class IcepKbPollHandler : DevicePollHandler<ManagedWrapper.Stroke>
+    public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke>
     {
-        public IcepKbPollHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
+        public IcepKbUpdateHandler(DeviceDescriptor deviceDescriptor, ISubscriptionHandler subhandler) : base(deviceDescriptor, subhandler)
         {
-            PollProcessors.Add((BindingType.Button, 0), new IcepKbPollProcessor());
+            UpdateProcessors.Add((BindingType.Button, 0), new IcepKbUpdateProcessor());
         }
 
-        protected override BindingUpdate[] PreProcess(ManagedWrapper.Stroke pollData)
+        protected override BindingUpdate[] PreProcessUpdate(ManagedWrapper.Stroke update)
         {
-            var code = pollData.key.code;
-            var state = pollData.key.state;
+            var code = update.key.code;
+            var state = update.key.state;
 
             // Begin translation of incoming key code, state, extended flag etc...
             // If state is shifted up by 2 (1 or 2 instead of 0 or 1), then this is an "Extended" key code
@@ -58,7 +58,7 @@ namespace BindingDictionaryTestTwo.Polling.Interception
             return new[] { new BindingUpdate { Binding = new BindingDescriptor() { Type = BindingType.Button, Index = code }, Value = state } };
         }
 
-        protected override (BindingType, int) GetPollProcessorKey(BindingDescriptor bindingDescriptor)
+        protected override (BindingType, int) GetUpdateProcessorKey(BindingDescriptor bindingDescriptor)
         {
             return (bindingDescriptor.Type, 0);
         }

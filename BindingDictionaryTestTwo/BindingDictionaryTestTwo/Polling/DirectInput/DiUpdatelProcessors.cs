@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingDictionaryTestTwo.Polling.DirectInput
 {
-    public class DiButtonProcessor : IPollProcessor
+    public class DiButtonProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
@@ -15,7 +15,7 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
         }
     }
 
-    public class DiAxisProcessor : IPollProcessor
+    public class DiAxisProcessor : IUpdateProcessor
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
@@ -24,7 +24,7 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
         }
     }
 
-    public class DiPoVProcessor : IPollProcessor
+    public class DiPoVProcessor : IUpdateProcessor
     {
         private int _currentValue = -1;
         private readonly int[] _directionStates = { 0, 0, 0, 0 };

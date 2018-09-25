@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BindingDictionaryTestTwo.Polling
 {
-    public interface IPollProcessor
+    public interface IUpdateProcessor
     {
         BindingUpdate[] Process(BindingUpdate update);
     }

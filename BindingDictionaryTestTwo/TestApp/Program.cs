@@ -21,11 +21,11 @@ namespace TestApp
         {
             var dev = new DeviceDescriptor { DeviceHandle = "TestHandle" };
             var subHandler = new SubscriptionHandler(dev, DeviceEmptyHandler);
-            var diHandler = new DiDevicePollHandler(new DeviceDescriptor{DeviceHandle = "DI-Fake"}, subHandler);
+            var diHandler = new DiDeviceUpdateHandler(new DeviceDescriptor{DeviceHandle = "DI-Fake"}, subHandler);
             diHandler.BindModeUpdate = BindModeHandler;
-            var xiHandler = new XiDevicePollHandler(new DeviceDescriptor {DeviceHandle = "XI-Fake"}, subHandler);
+            var xiHandler = new XiDeviceUpdateHandler(new DeviceDescriptor {DeviceHandle = "XI-Fake"}, subHandler);
             xiHandler.BindModeUpdate = BindModeHandler;
-            var iceptKbHandler = new IcepKbPollHandler(new DeviceDescriptor{DeviceHandle = "Interception-Fake"}, subHandler);
+            var iceptKbHandler = new IcepKbUpdateHandler(new DeviceDescriptor{DeviceHandle = "Interception-Fake"}, subHandler);
             iceptKbHandler.BindModeUpdate = BindModeHandler;
 
             var bd1 = new BindingDescriptor { Type = BindingType.Button, Index = 1 };
@@ -58,16 +58,16 @@ namespace TestApp
             //diHandler.SetDetectionMode(DetectionMode.Bind);
             iceptKbHandler.SetDetectionMode(DetectionMode.Bind);
 
-            iceptKbHandler.Poll(new ManagedWrapper.Stroke{key = new ManagedWrapper.KeyStroke { code = 1, state = 0 } });
+            iceptKbHandler.ProcessUpdate(new ManagedWrapper.Stroke{key = new ManagedWrapper.KeyStroke { code = 1, state = 0 } });
 
-            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.B } });
-            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.None } });
-            //xiHandler.Poll(new State { Gamepad = { Buttons = GamepadButtonFlags.DPadRight } });
-            //xiHandler.Poll(new State { Gamepad = { LeftThumbX = 200} });
+            //xiHandler.ProcessUpdate(new State { Gamepad = { Buttons = GamepadButtonFlags.B } });
+            //xiHandler.ProcessUpdate(new State { Gamepad = { Buttons = GamepadButtonFlags.None } });
+            //xiHandler.ProcessUpdate(new State { Gamepad = { Buttons = GamepadButtonFlags.DPadRight } });
+            //xiHandler.ProcessUpdate(new State { Gamepad = { LeftThumbX = 200 } });
 
-            //diHandler.Poll(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 0 });
-            //diHandler.Poll(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 9000});
-            //diHandler.Poll(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = -1});
+            //diHandler.ProcessUpdate(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 0 });
+            //diHandler.ProcessUpdate(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = 9000 });
+            //diHandler.ProcessUpdate(new JoystickUpdate { RawOffset = (int)JoystickOffset.PointOfViewControllers0, Value = -1 });
 
             pov1U.Unsubscribe();
             pov1R.Unsubscribe();
