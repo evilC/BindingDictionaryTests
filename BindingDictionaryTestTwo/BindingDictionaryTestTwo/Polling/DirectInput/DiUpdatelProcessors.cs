@@ -10,8 +10,8 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            var value = update.Value == 128 ? 1 : 0;
-            return new[] { new BindingUpdate{Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = 0 }, Value = value} };
+            update.Value = update.Value == 128 ? 1 : 0;
+            return new[] { update };
         }
     }
 
@@ -19,8 +19,8 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            var value = (65535 - update.Value) - 32768;
-            return new[] { new BindingUpdate{Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = 0 }, Value = value} };
+            update.Value = (65535 - update.Value) - 32768;
+            return new[] { update };
         }
     }
 
@@ -31,14 +31,9 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
 
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            return GenerateBindingUpdates(update).ToArray();
-        }
-
-        public List<BindingUpdate> GenerateBindingUpdates(BindingUpdate update)
-        {
             var ret = new List<BindingUpdate>();
             var newAngle = update.Value;
-            if (_currentValue == newAngle) return ret;
+            if (_currentValue == newAngle) return ret.ToArray();
             _currentValue = newAngle;
             for (var i = 0; i < 4; i++)
             {
@@ -62,7 +57,7 @@ namespace BindingDictionaryTestTwo.Polling.DirectInput
                 });
             }
 
-            return ret;
+            return ret.ToArray();
         }
 
     }

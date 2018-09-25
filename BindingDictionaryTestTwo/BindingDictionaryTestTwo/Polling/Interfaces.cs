@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BindingDictionaryTestTwo.Polling
 {
     /// <summary>
-    /// Interface for handling Axis value conversion, POV physical to logical values etc
+    /// Interface for handling Button/Axis value normalization, POV physical to logical values etc
     /// </summary>
     public interface IUpdateProcessor
     {

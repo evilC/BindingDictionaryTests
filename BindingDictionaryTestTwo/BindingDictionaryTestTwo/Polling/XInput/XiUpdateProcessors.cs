@@ -10,8 +10,7 @@ namespace BindingDictionaryTestTwo.Polling.XInput
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            var value = update.Value;
-            return new[] { new BindingUpdate { Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = update.Binding.SubIndex }, Value = value } };
+            return new[] { update };
         }
     }
 
@@ -19,8 +18,7 @@ namespace BindingDictionaryTestTwo.Polling.XInput
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            var value = update.Value;
-            return new[] { new BindingUpdate { Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = update.Binding.SubIndex }, Value = value } };
+            return new[] { update };
         }
     }
 
@@ -28,8 +26,8 @@ namespace BindingDictionaryTestTwo.Polling.XInput
     {
         public BindingUpdate[] Process(BindingUpdate update)
         {
-            var value = (update.Value * 257) - 32768;
-            return new[] { new BindingUpdate { Binding = new BindingDescriptor { Type = update.Binding.Type, Index = update.Binding.Index, SubIndex = update.Binding.SubIndex }, Value = value } };
+            update.Value = (update.Value * 257) - 32768;
+            return new[] { update };
         }
     }
 }
