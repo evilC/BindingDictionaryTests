@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BindingDictionaryTestTwo.Subscriptions;
+using BindingDictionaryTestTwo.Updates;
 using SharpDX.XInput;
 
-namespace BindingDictionaryTestTwo.Polling.XInput
+namespace BindingDictionaryTestTwo.Providers.XInput
 {
     public class XiDeviceUpdateHandler : DeviceUpdateHandler<State, (BindingType, int)>
     {

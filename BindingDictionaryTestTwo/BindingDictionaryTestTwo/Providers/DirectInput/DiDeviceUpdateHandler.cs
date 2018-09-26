@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using BindingDictionaryTestTwo.Subscriptions;
+﻿using BindingDictionaryTestTwo.Subscriptions;
+using BindingDictionaryTestTwo.Updates;
 using SharpDX.DirectInput;
 
-namespace BindingDictionaryTestTwo.Polling.DirectInput
+namespace BindingDictionaryTestTwo.Providers.DirectInput
 {
     public class DiDeviceUpdateHandler : DeviceUpdateHandler<JoystickUpdate, (BindingType, int)>
     {

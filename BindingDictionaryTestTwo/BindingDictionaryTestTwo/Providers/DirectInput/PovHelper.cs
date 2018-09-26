@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BindingDictionaryTestTwo.Polling.DirectInput
+namespace BindingDictionaryTestTwo.Providers.DirectInput
 {
     public static class PovHelper
     {

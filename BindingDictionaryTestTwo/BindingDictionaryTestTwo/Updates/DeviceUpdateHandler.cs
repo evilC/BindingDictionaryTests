@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BindingDictionaryTestTwo.Subscriptions;
 
-namespace BindingDictionaryTestTwo.Polling
+namespace BindingDictionaryTestTwo.Updates
 {
     /// <summary>
     /// Handles processing of Updates for a device. 

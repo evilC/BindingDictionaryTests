@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BindingDictionaryTestTwo.Polling.Interception.Lib;
+﻿using BindingDictionaryTestTwo.Providers.Interception.Lib;
 using BindingDictionaryTestTwo.Subscriptions;
+using BindingDictionaryTestTwo.Updates;
 
-namespace BindingDictionaryTestTwo.Polling.Interception
+namespace BindingDictionaryTestTwo.Providers.Interception
 {
     public class IcepKbUpdateHandler : DeviceUpdateHandler<ManagedWrapper.Stroke, BindingType>
     {

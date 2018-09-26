@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BindingDictionaryTestTwo.Updates;
 
-namespace BindingDictionaryTestTwo.Polling.XInput
+namespace BindingDictionaryTestTwo.Providers.XInput
 {
     public class XiButtonProcessor : IUpdateProcessor
     {

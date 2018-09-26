@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BindingDictionaryTestTwo.Polling
+﻿namespace BindingDictionaryTestTwo.Updates
 {
     /// <summary>
     /// Interface for handling Button/Axis value normalization, POV physical to logical values etc
